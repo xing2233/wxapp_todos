@@ -1,0 +1,22 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="search">
+    <image bindtap="handleAdd" src="/pages/images/icon_add.png"></image>
+    <input bindinput="handleInputChange" type="text" value="{{search}}" />
+  </view>
+  <block wx:if="{{todos.length>0}}">
+    <view class="todos">
+      <view bindtap="handleChangeStatus" wx:key="index" data-index="{{index}}" class="item" wx:for="{{todos}}">
+        <icon type="{{item.completed===true?'success':'circle'}}"></icon>
+        <text class="{{item.completed===true?'completed':''}}">{{item.name}}</text>
+        <icon catchtap="handleDel" type="clear" data-index="{{index}}" size="16"></icon>
+      </view>
+
+    </view>
+    <view class="footer">
+      <text bindtap="handleToggleAll">Toggle all</text>
+      <text wx:if="{{leftCount}}">{{leftCount}} {{leftCount%2===1? 'item' : 'items'}} left</text>
+      <text bindtap="handleClearCompleted">Clear completed</text>
+    </view>
+  </block>
+</view>
